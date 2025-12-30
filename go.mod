@@ -2,6 +2,10 @@ module sudhanv09/torus
 
 go 1.25.5
 
+require (
+	github.com/gocolly/colly/v2 v2.3.0
+	github.com/joho/godotenv v1.5.1
+)
 
 require (
 	github.com/PuerkitoBio/goquery v1.11.0 // indirect
@@ -19,7 +23,6 @@ require (
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
-	github.com/gocolly/colly/v2 v2.3.0
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/kennygrant/sanitize v1.2.4 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect

@@ -3,11 +3,15 @@ package metadata
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
+	"io"
 	"net/http"
+	"net/url"
+	"os"
 )
 
-const baseTVDBURL = "https://api.thetvdb.com"
+const baseTVDBURL = "https://api4.thetvdb.com/v4"
 
 type TVDBSeries struct {
 	Aliases         []string `json:"aliases"`
@@ -41,12 +45,12 @@ type TVDBResponse struct {
 	Data   []TVDBSeries `json:"data"`
 	Status string       `json:"status"`
 	Links  struct {
+		Previous   string    `json:"prev"`
 		Self       string `json:"self"`
-		Next       int    `json:"next"`
-		Previous   int    `json:"prev"`
+		Next       string    `json:"next"`
 		TotalItems int    `json:"total_items"`
 		PageSize   int    `json:"page_size"`
-	}
+	} `json:"links"`
 }
 
 type TVDBLoginResponse struct {
@@ -58,8 +62,13 @@ type TVDBLoginResponse struct {
 
 func login() (*TVDBLoginResponse, error) {
 	url := fmt.Sprintf("%s/login", baseTVDBURL)
+	key := os.Getenv("TVDB_API")
+	if key == "" {
+		return nil, errors.New("TVDB API key is not set")
+	}
 	reqBody := map[string]string{
-		"apikey": "",
+		"apikey": key,
+		"pin":    "",
 	}
 	b, err := json.Marshal(reqBody)
 	if err != nil {
@@ -69,20 +78,71 @@ func login() (*TVDBLoginResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	defer response.Body.Close()
+
+	if response.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(response.Body)
+		return nil, fmt.Errorf("tvdb login failed: status %d, body: %s", response.StatusCode, string(body))
+	}
+
 	var tvdbLoginResponse TVDBLoginResponse
-	json.NewDecoder(response.Body).Decode(&tvdbLoginResponse)
+	if err := json.NewDecoder(response.Body).Decode(&tvdbLoginResponse); err != nil {
+		return nil, err
+	}
+
+	if tvdbLoginResponse.Data.Token == "" {
+		return nil, errors.New("tvdb login failed: missing token in response")
+	}
+
 	return &tvdbLoginResponse, nil
 }
 
+func buildTVDBURL(query string) (string, error) {
+	u, err := url.Parse(baseTVDBURL + "/search")
+	if err != nil {
+		return "", err
+	}
+	q := u.Query()
+	q.Set("query", query)
+	q.Set("type", "series")
+	q.Set("language", "eng")
+	u.RawQuery = q.Encode()
+	return u.String(), nil
+}
+
 func SearchSeries(query string) (*TVDBResponse, error) {
-	url := fmt.Sprintf("%s/search/series?query=%s", baseTVDBURL, query)
-	response, err := http.Get(url)
+	searchURL, err := buildTVDBURL(query)
+	if err != nil {
+		return nil, err
+	}
+	loginResp, err := login()
+	if err != nil {
+		fmt.Println("Error logging in to TVDB:", err)
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", searchURL, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", loginResp.Data.Token))
+
+	response, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil, err
 	}
 	defer response.Body.Close()
+
+	if response.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(response.Body)
+		return nil, fmt.Errorf("tvdb search failed: status %d, body: %s", response.StatusCode, string(body))
+	}
+
 	var tvdbResponse TVDBResponse
-	json.NewDecoder(response.Body).Decode(&tvdbResponse)
+	if err := json.NewDecoder(response.Body).Decode(&tvdbResponse); err != nil {
+		return nil, err
+	}
 	return &tvdbResponse, nil
 }
