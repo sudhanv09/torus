@@ -27,6 +27,7 @@ require (
 	github.com/kennygrant/sanitize v1.2.4 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/middelink/go-parse-torrent-name v0.0.0-20190301154245-3ff4efacd4c4 // indirect
 	github.com/natefinch/atomic v1.0.1 // indirect
 	github.com/nlnwa/whatwg-url v0.6.2 // indirect
 	github.com/saintfish/chardet v0.0.0-20230101081208-5e3ef4b5456d // indirect
