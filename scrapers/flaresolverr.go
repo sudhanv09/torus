@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-const baseURL = "http://localhost:8191/v1"
+const baseflareSolverrURL = "http://localhost:8191/v1"
 
 type flareSolveRequest struct {
 	Cmd        string `json:"cmd"`
@@ -17,8 +17,8 @@ type flareSolveRequest struct {
 }
 
 type flareSolveResponse struct {
-	Status  string `json:"status"`
-	Message string `json:"message"`
+	Status   string `json:"status"`
+	Message  string `json:"message"`
 	Solution struct {
 		UserAgent string `json:"userAgent"`
 		Cookies   []struct {
@@ -48,7 +48,7 @@ func solve(urlStr string) (*SolvedSession, error) {
 	}
 
 	client := &http.Client{Timeout: 90 * time.Second}
-	resp, err := client.Post(baseURL, "application/json", bytes.NewReader(b))
+	resp, err := client.Post(baseflareSolverrURL, "application/json", bytes.NewReader(b))
 	if err != nil {
 		return nil, err
 	}
