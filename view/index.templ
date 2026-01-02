@@ -1,0 +1,81 @@
+package view
+
+import "sudhanv09/torus/view/components"
+
+templ Dashboard() {
+	@layout("Torus - Dashboard") {
+		<div class="layout">
+			@components.Sidebar("dashboard")
+			<div class="layout__main">
+				<header class="header">
+					<div class="header__content">
+						@components.Search()
+						@components.Filters("all")
+					</div>
+				</header>
+				<main class="content">
+					<div class="content__header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg);">
+						<h2 style="font-size: 1.25rem; font-weight: 700;">Trending Now</h2>
+						<a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600;">View All</a>
+					</div>
+					<div class="grid grid--cards">
+						@components.MediaCard(components.MediaItem{
+							ID: 1,
+							Title: "Dune: Part Two",
+							Year: "2024",
+							Type: "Movie",
+							PosterURL: "https://via.placeholder.com/300x450/182830/13a4ec?text=Dune",
+							Rating: 8.8,
+							Status: "",
+						})
+						@components.MediaCard(components.MediaItem{
+							ID: 2,
+							Title: "The Bear",
+							Year: "2022",
+							Type: "Series",
+							PosterURL: "https://via.placeholder.com/300x450/182830/22c55e?text=The+Bear",
+							Rating: 8.7,
+							Status: "Monitored",
+						})
+						@components.MediaCard(components.MediaItem{
+							ID: 3,
+							Title: "Fallout",
+							Year: "2024",
+							Type: "Series",
+							PosterURL: "https://via.placeholder.com/300x450/182830/eab308?text=Fallout",
+							Rating: 8.5,
+							Status: "",
+						})
+						@components.MediaCard(components.MediaItem{
+							ID: 4,
+							Title: "Shōgun",
+							Year: "2024",
+							Type: "Series",
+							PosterURL: "https://via.placeholder.com/300x450/182830/ef4444?text=Shogun",
+							Rating: 9.0,
+							Status: "",
+						})
+						@components.MediaCard(components.MediaItem{
+							ID: 5,
+							Title: "Civil War",
+							Year: "2024",
+							Type: "Movie",
+							PosterURL: "https://via.placeholder.com/300x450/182830/8b5cf6?text=Civil+War",
+							Rating: 7.6,
+							Status: "",
+						})
+						@components.MediaCard(components.MediaItem{
+							ID: 6,
+							Title: "3 Body Problem",
+							Year: "2024",
+							Type: "Series",
+							PosterURL: "https://via.placeholder.com/300x450/182830/f97316?text=3+Body",
+							Rating: 7.8,
+							Status: "",
+						})
+					</div>
+				</main>
+			</div>
+		</div>
+	}
+}

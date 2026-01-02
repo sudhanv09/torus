@@ -1,0 +1,35 @@
+package components
+
+templ Sidebar(activePage string) {
+	<aside class="sidebar">
+		<div class="sidebar__header">
+			<h1 class="sidebar__title">Torus</h1>
+			<p class="sidebar__subtitle">Media Tracker</p>
+		</div>
+		<nav class="sidebar__nav">
+			<a href="/" class={ "nav-link", templ.KV("nav-link--active", activePage == "dashboard") }>
+				<span class="material-symbols-outlined">dashboard</span>
+				<span>Dashboard</span>
+			</a>
+			<a href="/search" class={ "nav-link", templ.KV("nav-link--active", activePage == "search") }>
+				<span class="material-symbols-outlined">search</span>
+				<span>Search</span>
+			</a>
+			<a href="/activity" class={ "nav-link", templ.KV("nav-link--active", activePage == "activity") }>
+				<span class="material-symbols-outlined">insights</span>
+				<span>Activity</span>
+			</a>
+			<a href="/calendar" class={ "nav-link", templ.KV("nav-link--active", activePage == "calendar") }>
+				<span class="material-symbols-outlined">calendar_month</span>
+				<span>Calendar</span>
+			</a>
+		</nav>
+		<div class="sidebar__footer">
+			<a href="/settings" class={ "nav-link", templ.KV("nav-link--active", activePage == "settings") }>
+				<span class="material-symbols-outlined">settings</span>
+				<span>Settings</span>
+			</a>
+		</div>
+	</aside>
+}
+

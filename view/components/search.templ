@@ -1,0 +1,29 @@
+package components
+
+templ Search() {
+	<div class="search">
+		<span class="search__icon material-symbols-outlined">search</span>
+		<input 
+			type="text" 
+			class="search__input" 
+			placeholder="Search for movies or TV shows..."
+			autofocus
+		/>
+	</div>
+}
+
+templ Filters(activeFilter string) {
+	<div class="filters">
+		<button class={ "filter-btn", templ.KV("filter-btn--active", activeFilter == "all") }>
+			All
+		</button>
+		<button class={ "filter-btn", templ.KV("filter-btn--active", activeFilter == "movies") }>
+			<span class="material-symbols-outlined" style="font-size: 1.125rem; margin-right: 0.5rem;">movie</span>
+			Movies
+		</button>
+		<button class={ "filter-btn", templ.KV("filter-btn--active", activeFilter == "tv") }>
+			<span class="material-symbols-outlined" style="font-size: 1.125rem; margin-right: 0.5rem;">tv</span>
+			TV Shows
+		</button>
+	</div>
+}

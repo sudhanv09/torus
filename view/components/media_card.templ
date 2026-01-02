@@ -1,0 +1,36 @@
+package components
+
+type MediaItem struct {
+	ID       int
+	Title    string
+	Year     string
+	Type     string
+	PosterURL string
+	Rating   float64
+	Status   string
+}
+
+templ MediaCard(item MediaItem) {
+	<div class="media-card">
+		<div class="media-card__poster">
+			<img 
+				src={ item.PosterURL } 
+				alt={ item.Title } 
+				class="media-card__image"
+			/>
+			if item.Status != "" {
+				<div class="media-card__status">
+					{ item.Status }
+				</div>
+			}
+		</div>
+		<div class="media-card__info">
+			<h3 class="media-card__title">{ item.Title }</h3>
+			<div class="media-card__meta">
+				<span>{ item.Year }</span>
+				<span>{ item.Type }</span>
+			</div>
+		</div>
+	</div>
+}
+

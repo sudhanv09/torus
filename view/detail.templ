@@ -1,0 +1,126 @@
+package view
+
+import "sudhanv09/torus/view/components"
+
+type MediaDetail struct {
+	Title       string
+	Year        string
+	Studio      string
+	Rating      string
+	Runtime     string
+	PosterURL   string
+	Status      string
+	Monitored   bool
+	Synopsis    string
+	Director    string
+	Writers     string
+	Genres      []string
+}
+
+templ Detail(media MediaDetail) {
+	@layout("Torus - " + media.Title) {
+		<div class="layout">
+			@components.Sidebar("dashboard")
+			<div class="layout__main">
+				<div class="detail-hero">
+					<div class="detail-hero__content">
+						<div class="detail-hero__poster">
+							<img src={ media.PosterURL } alt={ media.Title }/>
+						</div>
+						<div class="detail-hero__info">
+							<h1 class="detail-hero__title">{ media.Title }</h1>
+							<div class="detail-hero__meta">
+								<span>{ media.Rating }</span>
+								<span>•</span>
+								<span>{ media.Runtime }</span>
+								<span>•</span>
+								<span>⭐ 8.8</span>
+								<span style="padding: var(--space-xs) var(--space-sm); background: var(--success); color: white; border-radius: var(--radius); font-size: 0.75rem; font-weight: 600;">
+									{ media.Status }
+								</span>
+							</div>
+							<div class="detail-hero__actions">
+								<button class="btn btn--primary">
+									<span class="material-symbols-outlined">search</span>
+									Search Now
+								</button>
+								<button class="btn" style="background: var(--surface); border: 1px solid var(--border);">
+									<span class="material-symbols-outlined">edit</span>
+									Edit
+								</button>
+								<button class="btn" style="background: var(--surface); border: 1px solid var(--border);">
+									<span class="material-symbols-outlined">refresh</span>
+								</button>
+								<label style="display: flex; align-items: center; gap: var(--space-sm); padding: 0 var(--space-lg); cursor: pointer;">
+									<span style="font-weight: 600;">Monitored</span>
+									<input type="checkbox" checked?={ media.Monitored }/>
+								</label>
+							</div>
+							<div class="detail-hero__genres">
+								for _, genre := range media.Genres {
+									<span class="genre-tag">{ genre }</span>
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="detail-section">
+					<h2 class="detail-section__title">
+						<span class="material-symbols-outlined" style="color: var(--primary);">description</span>
+						Synopsis
+					</h2>
+					<p class="detail-section__content">{ media.Synopsis }</p>
+				</div>
+				<div class="detail-section">
+					<h2 class="detail-section__title">
+						<span class="material-symbols-outlined" style="color: var(--primary);">folder</span>
+						File Details
+					</h2>
+					<div class="detail-grid">
+						<div class="detail-item">
+							<span class="detail-item__label">Quality</span>
+							<span class="detail-item__value">Bluray-2160p</span>
+						</div>
+						<div class="detail-item">
+							<span class="detail-item__label">Size</span>
+							<span class="detail-item__value">24.5 GB</span>
+						</div>
+						<div class="detail-item">
+							<span class="detail-item__label">Audio</span>
+							<span class="detail-item__value">TrueHD 7.1 Atmos</span>
+						</div>
+						<div class="detail-item">
+							<span class="detail-item__label">Date Added</span>
+							<span class="detail-item__value">2 days ago</span>
+						</div>
+					</div>
+					<div style="margin-top: var(--space); padding: var(--space); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); font-family: monospace; font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between;">
+						<div style="overflow: hidden; text-overflow: ellipsis;">
+							<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: var(--space-sm);">movie</span>
+							Dune.Part.Two.2024.2160p.UHD.BluRay.x265.10bit.HDR.TrueHD.7.1.Atmos-PIRAT.mkv
+						</div>
+						<button class="btn" style="padding: var(--space-xs) var(--space-sm); background: transparent; border: 1px solid var(--border);">
+							<span class="material-symbols-outlined" style="font-size: 1rem;">delete</span>
+						</button>
+					</div>
+				</div>
+				<div class="detail-section">
+					<h2 class="detail-section__title">
+						<span class="material-symbols-outlined" style="color: var(--primary);">groups</span>
+						Top Cast
+					</h2>
+					<div class="cast-grid">
+						for i := 0; i < 6; i++ {
+							<div class="cast-member">
+								<div class="cast-member__avatar"></div>
+								<div class="cast-member__name">Actor Name</div>
+								<div class="cast-member__character">Character</div>
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+}
+
