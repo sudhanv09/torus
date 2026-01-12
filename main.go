@@ -18,4 +18,6 @@ func main() {
 		log.Fatalf("Error initializing database: %v", err)
 	}
 	log.Println("Database initialized successfully")
+
+	startServer()
 }
