@@ -68,6 +68,17 @@ func createTables() error {
 			FOREIGN KEY (season_id) REFERENCES seasons(id) ON DELETE CASCADE,
 			UNIQUE(tracked_item_id, season_number, episode_number)
 		)`,
+		`CREATE TABLE IF NOT EXISTS quality_profiles (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			name TEXT NOT NULL UNIQUE,
+			preferred_resolutions TEXT DEFAULT '["1080p","2160p"]',
+			min_resolution TEXT DEFAULT '720p',
+			preferred_sources TEXT DEFAULT '["BluRay","WEB-DL","Remux"]',
+			preferred_codecs TEXT DEFAULT '["x265","HEVC"]',
+			blocked_words TEXT DEFAULT '["CAM","HDTS","TELESYNC","HDCAM","TS","TC"]',
+			preferred_groups TEXT DEFAULT '[]',
+			min_seeders INTEGER DEFAULT 3
+		)`,
 	}
 
 	for _, q := range queries {
