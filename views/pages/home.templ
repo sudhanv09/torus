@@ -6,8 +6,12 @@ import (
 
 templ Home() {
 	@layouts.Base("Home") {
-		<div>
-			Hello
-		</div>
+		<header class="app-nav">
+			<input
+				 class="input"
+				 placeholder="Search"
+				 type="text" />
+			<p>User</p>
+		</header>
 	}
 }

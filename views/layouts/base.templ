@@ -26,15 +26,8 @@ templ Base(title string) {
 			</script>
 		</head>
 		<body>
-			<header class="glass" style="padding: 1rem; margin-bottom: 2rem;">
-				<div class="container flex justify-between items-center">
-					<h1>Torus</h1>
-					<button class="button button-primary" onclick="toggleTheme()">
-						🌓 Toggle Theme
-					</button>
-				</div>
-			</header>
-			<main class="container">
+			@Sidebar()
+			<main>
 				{ children... }
 			</main>
 		</body>

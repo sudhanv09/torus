@@ -42,7 +42,15 @@ func Base(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, " - Torus</title><link rel=\"stylesheet\" href=\"/static/css/style.css\"><script>\n\t\t\t\t// Inline theme loader to prevent flash\n\t\t\t\t(function() {\n\t\t\t\t\tconst theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n\t\t\t\t\tif (theme === 'dark') {\n\t\t\t\t\t\tdocument.documentElement.classList.add('dark');\n\t\t\t\t\t}\n\t\t\t\t})();\n\t\t\t</script><!-- Datastar --><script type=\"module\" src=\"https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.0-beta.1/bundles/datastar.js\"></script><script>\n\t\t\t\tfunction toggleTheme() {\n\t\t\t\t\tconst isDark = document.documentElement.classList.toggle('dark');\n\t\t\t\t\tlocalStorage.setItem('theme', isDark ? 'dark' : 'light');\n\t\t\t\t}\n\t\t\t</script></head><body><header class=\"glass\" style=\"padding: 1rem; margin-bottom: 2rem;\"><div class=\"container flex justify-between items-center\"><h1>Torus</h1><button class=\"button button-primary\" onclick=\"toggleTheme()\">🌓 Toggle Theme</button></div></header><main class=\"container\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, " - Torus</title><link rel=\"stylesheet\" href=\"/static/css/style.css\"><script>\n\t\t\t\t(function() {\n\t\t\t\t\tconst theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n\t\t\t\t\tif (theme === 'dark') {\n\t\t\t\t\t\tdocument.documentElement.classList.add('dark');\n\t\t\t\t\t}\n\t\t\t\t})();\n\t\t\t</script><!-- Datastar --><script type=\"module\" src=\"https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.0-beta.1/bundles/datastar.js\"></script><script>\n\t\t\t\tfunction toggleTheme() {\n\t\t\t\t\tconst isDark = document.documentElement.classList.toggle('dark');\n\t\t\t\t\tlocalStorage.setItem('theme', isDark ? 'dark' : 'light');\n\t\t\t\t}\n\t\t\t</script></head><body>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = Sidebar().Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<main>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -50,7 +58,7 @@ func Base(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</main></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</main></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
