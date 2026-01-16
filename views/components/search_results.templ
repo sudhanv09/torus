@@ -1,0 +1,42 @@
+package components
+
+import (
+	"fmt"
+	"sudhanv09/torus/models"
+)
+
+templ SearchResults(results []models.TMDBResults) {
+	<div id="search-results" class="search-results-grid">
+		for _, result := range results {
+			@SearchResultCard(result)
+		}
+	</div>
+}
+
+templ SearchResultCard(result models.TMDBResults) {
+	<div class="card search-card animate-fade-in">
+		<div class="search-card--poster">
+			if result.PosterPath != "" {
+				<img src={ fmt.Sprintf("https://image.tmdb.org/t/p/w342%s", result.PosterPath) } alt={ result.Title } loading="lazy" />
+			} else {
+				<div class="poster-placeholder">
+					<span>No Image</span>
+				</div>
+			}
+			<div class="search-card--badge">
+				{ result.MediaType }
+			</div>
+		</div>
+		<div class="search-card--info">
+			<h3>{ result.Title }</h3>
+			if result.ReleaseDate != "" {
+				<p class="text-muted">{ result.ReleaseDate[:4] }</p>
+			}
+			<div class="search-card--meta">
+				<span class="rating">
+					⭐ { fmt.Sprintf("%.1f", result.VoteAverage) }
+				</span>
+			</div>
+		</div>
+	</div>
+}

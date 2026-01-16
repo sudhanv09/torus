@@ -13,6 +13,7 @@ func startServer() {
 
 	mux.HandleFunc("/", controllers.HomeHandler)
 	mux.HandleFunc("/search", controllers.SearchHandler)
+	mux.HandleFunc("/search/results", controllers.SearchResultsHandler)
 	mux.HandleFunc("/settings", controllers.SettingsHandler)
 
 	addr := ":8080"
