@@ -248,3 +248,60 @@ main {
 
     padding: 0 0.5rem;
 }
+
+.search-group {
+    display: flex;
+    gap: 0.75rem;
+    margin: 0.5rem 0;
+    width: 100%;
+    padding: 0.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+}
+
+.search-group .input {
+    flex: 1;
+    height: 3rem;
+    font-size: 1rem;
+}
+
+.search-group select.input {
+    flex: 0 0 auto;
+    width: 160px;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2rem;
+    padding-right: 2.5rem;
+    appearance: none;
+}
+
+.search-group select.input:hover {
+    background-color: var(--accent);
+}
+
+.search-group select.input option {
+    background-color: var(--popover);
+    color: var(--popover-foreground);
+    padding: 1rem;
+}
+
+#search-results {
+    width: 100%;
+    margin: 0;
+    padding: 0.25rem 0;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--muted-foreground);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+    opacity: 0.5;
+}

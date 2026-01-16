@@ -1,3 +1,4 @@
 .env
 torus
 torus.db
+tmp

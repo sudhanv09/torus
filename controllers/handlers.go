@@ -10,7 +10,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Search results will appear here."))
+	pages.Search().Render(r.Context(), w)
 }
 
 func SettingsHandler(w http.ResponseWriter, r *http.Request) {
