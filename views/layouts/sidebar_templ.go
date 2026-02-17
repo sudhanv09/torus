@@ -29,7 +29,7 @@ func Sidebar() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<aside class=\"sidebar\"><div class=\"sidebar--header\"><a href=\"/\"><h1>Torus</h1></a></div><nav class=\"sidebar--menu\"><a href=\"/search\" class=\"sidebar--menu-item\">Search</a> <a href=\"/activity\" class=\"sidebar--menu-item\">Activity</a> <a href=\"/settings\" class=\"sidebar--menu-item\">Settings</a></nav></aside>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<aside data-sidebar><header><a href=\"/\" class=\"brand\">Torus</a></header><nav><ul><li><a href=\"/search\">Search</a></li><li><a href=\"/activity\">Activity</a></li><li><a href=\"/settings\">Settings</a></li></ul></nav></aside>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

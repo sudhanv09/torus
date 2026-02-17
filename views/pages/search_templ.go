@@ -45,7 +45,7 @@ func Search() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"page\"><div class=\"search-group\"><input class=\"input\" placeholder=\"Search for movies or tv shows...\" type=\"text\" data-bind:query data-on:input__debounce.200ms=\"@get('/search/results')\"></div><div id=\"search-results\"><div class=\"empty-state\"><p>Start typing to search for movies or TV shows</p></div></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"page\"><section class=\"search-group\"><label for=\"search-query\">Search catalog</label> <input id=\"search-query\" placeholder=\"Search for movies or tv shows...\" type=\"text\" data-bind:query data-on:input__debounce.200ms=\"@get('/search/results')\"></section><div id=\"search-results\"><div class=\"empty-state\"><p>Start typing to search for movies or TV shows</p></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

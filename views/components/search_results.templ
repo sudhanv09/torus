@@ -14,7 +14,7 @@ templ SearchResults(results []models.TMDBResults) {
 }
 
 templ SearchResultCard(result models.TMDBResults) {
-	<div class="card search-card animate-fade-in">
+	<article class="card search-card animate-pop-in">
 		<div class="search-card--poster">
 			if result.PosterPath != "" {
 				<img src={ fmt.Sprintf("https://image.tmdb.org/t/p/w342%s", result.PosterPath) } alt={ result.Title } loading="lazy" />
@@ -23,14 +23,14 @@ templ SearchResultCard(result models.TMDBResults) {
 					<span>No Image</span>
 				</div>
 			}
-			<div class="search-card--badge">
+			<div class="badge secondary search-card--badge">
 				{ result.MediaType }
 			</div>
 		</div>
 		<div class="search-card--info">
 			<h3>{ result.Title }</h3>
 			if result.ReleaseDate != "" {
-				<p class="text-muted">{ result.ReleaseDate[:4] }</p>
+				<small>{ result.ReleaseDate[:4] }</small>
 			}
 			<div class="search-card--meta">
 				<span class="rating">
@@ -38,5 +38,5 @@ templ SearchResultCard(result models.TMDBResults) {
 				</span>
 			</div>
 		</div>
-	</div>
+	</article>
 }
