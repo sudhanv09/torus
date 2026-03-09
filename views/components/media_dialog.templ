@@ -1,0 +1,60 @@
+package components
+
+import (
+	"fmt"
+	"sudhanv09/torus/models"
+)
+
+templ MediaDialogContent(d *models.MediaDetails, alreadyTracked bool) {
+	<div
+		id="dialog-content"
+		data-signals={ fmt.Sprintf(`{"tmdbId":%d,"mediaType":"%s"}`, d.ID, d.Type) }
+	>
+		<header>
+			<h3>{ d.Title }</h3>
+			<button
+				class="ghost icon small"
+				type="button"
+				commandfor="media-dialog"
+				command="close"
+				aria-label="Close"
+			>✕</button>
+		</header>
+		<div class="hstack dialog-media">
+			if d.PosterPath != "" {
+				<img
+					src={ fmt.Sprintf("https://image.tmdb.org/t/p/w342%s", d.PosterPath) }
+					class="dialog-poster"
+					alt={ d.Title }
+				/>
+			}
+			<div class="vstack" style="gap: var(--space-3); flex: 1; min-width: 0;">
+				<div class="hstack" style="flex-wrap: wrap; gap: var(--space-2);">
+					if d.Year != "" {
+						<span class="badge">{ d.Year }</span>
+					}
+					<span class="badge secondary">{ fmt.Sprintf("%.1f ⭐", d.VoteAverage) }</span>
+					if d.Type == "tv" && d.NumSeasons > 0 {
+						<span class="badge secondary">{ fmt.Sprintf("%d seasons", d.NumSeasons) }</span>
+					}
+					if d.Type == "movie" && d.Runtime > 0 {
+						<span class="badge secondary">{ fmt.Sprintf("%dm", d.Runtime) }</span>
+					}
+				</div>
+				if d.Genres != "" {
+					<p class="text-light" style="font-size: var(--text-8);">{ d.Genres }</p>
+				}
+				if d.Overview != "" {
+					<p style="font-size: var(--text-7);">{ d.Overview }</p>
+				}
+			</div>
+		</div>
+		<footer>
+			if alreadyTracked {
+				<button disabled>Already tracking</button>
+			} else {
+				<button data-on:click="@post('/media/track')">Track</button>
+			}
+		</footer>
+	</div>
+}

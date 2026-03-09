@@ -39,3 +39,18 @@ type Episode struct {
 	AirDate       time.Time `json:"air_date"`
 	Status        string    `json:"status"` // "wanted", "downloaded", "failed"
 }
+
+type MediaDetails struct {
+	ID           int
+	Type         string // "movie" or "tv"
+	Title        string
+	Year         string
+	Overview     string
+	PosterPath   string
+	BackdropPath string
+	VoteAverage  float64
+	Genres       string // comma-separated names
+	NumSeasons   int    // TV only
+	Runtime      int    // movie only (minutes)
+	Status       string
+}
