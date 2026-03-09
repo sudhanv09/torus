@@ -14,7 +14,10 @@ templ SearchResults(results []models.TMDBResults) {
 }
 
 templ SearchResultCard(result models.TMDBResults) {
-	<article class="card search-card animate-pop-in">
+	<article
+		class="card search-card animate-pop-in"
+		data-on:click={ fmt.Sprintf("document.getElementById('media-dialog').showModal(); @get('/media/details?id=%d&type=%s')", result.ID, result.MediaType) }
+	>
 		<div class="search-card--poster">
 			if result.PosterPath != "" {
 				<img src={ fmt.Sprintf("https://image.tmdb.org/t/p/w342%s", result.PosterPath) } alt={ result.Title } loading="lazy" />
