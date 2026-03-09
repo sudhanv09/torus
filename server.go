@@ -15,6 +15,8 @@ func startServer() {
 	mux.HandleFunc("/search", controllers.SearchHandler)
 	mux.HandleFunc("/search/results", controllers.SearchResultsHandler)
 	mux.HandleFunc("/settings", controllers.SettingsHandler)
+	mux.HandleFunc("/media/details", controllers.MediaDetailsHandler)
+	mux.HandleFunc("/media/track", controllers.TrackHandler)
 
 	addr := ":8080"
 	log.Printf("Server starting on %s", addr)
