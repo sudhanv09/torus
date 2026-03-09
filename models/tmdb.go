@@ -26,6 +26,21 @@ type TMDBResponse struct {
 	TotalResults int         `json:"total_results"`
 }
 
+// TMDB Movie Details
+type TMDBMovieDetails struct {
+	ID           int         `json:"id"`
+	Title        string      `json:"title"`
+	Overview     string      `json:"overview"`
+	PosterPath   string      `json:"poster_path"`
+	BackdropPath string      `json:"backdrop_path"`
+	ReleaseDate  string      `json:"release_date"`
+	VoteAverage  float64     `json:"vote_average"`
+	Genres       []TMDBGenre `json:"genres"`
+	Runtime      int         `json:"runtime"`
+	Status       string      `json:"status"`
+	Tagline      string      `json:"tagline"`
+}
+
 // TMDB Tv Series Details
 type TMDBShowDetails struct {
 	Adult             bool                    `json:"adult"`
@@ -41,7 +56,7 @@ type TMDBShowDetails struct {
 	LastAirDate       string                  `json:"last_air_date"`
 	LastEpisodeToAir  TMDBEpisode             `json:"last_episode_to_air"`
 	Name              string                  `json:"name"`
-	NextEpisodeToAir  string                  `json:"next_episode_to_air"`
+	NextEpisodeToAir  *TMDBEpisode            `json:"next_episode_to_air"`
 	Networks          []TMDBNetwork           `json:"networks"`
 	NumberOfEpisodes  int                     `json:"number_of_episodes"`
 	NumberOfSeasons   int                     `json:"number_of_seasons"`

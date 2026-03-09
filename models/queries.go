@@ -70,3 +70,21 @@ func DeleteTrackedItem(id int64) error {
 	return err
 }
 
+func IsTracked(mediaType string, externalID string) (bool, error) {
+	var count int
+	err := db.DB.QueryRow("SELECT COUNT(1) FROM tracked_items WHERE type = ? AND external_id = ?", mediaType, externalID).Scan(&count)
+	return count > 0, err
+}
+
+func AddSeason(season *Season) error {
+	query := `INSERT OR IGNORE INTO seasons (tracked_item_id, season_number, title, overview, poster_path, status)
+			  VALUES (?, ?, ?, ?, ?, ?)`
+	res, err := db.DB.Exec(query, season.TrackedItemID, season.SeasonNumber, season.Title, season.Overview, season.PosterPath, season.Status)
+	if err != nil {
+		return err
+	}
+	id, _ := res.LastInsertId()
+	season.ID = id
+	return nil
+}
+

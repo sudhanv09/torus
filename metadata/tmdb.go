@@ -156,6 +156,40 @@ func SearchTv(query string) (*models.TMDBResponse, error) {
 	return &tmdbResponse, nil
 }
 
+func GetMovieById(id int) (*models.TMDBMovieDetails, error) {
+	u := fmt.Sprintf("%s/movie/%d?language=en-US", baseTMDBURL, id)
+	req, err := http.NewRequest("GET", u, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	key := os.Getenv("TMDB_API")
+	if key == "" {
+		return nil, errors.New("TMDB_API is not set")
+	}
+
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", key))
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(resp.Body)
+		return nil, fmt.Errorf("tmdb get movie failed: status %d, body: %s", resp.StatusCode, string(body))
+	}
+
+	var movie models.TMDBMovieDetails
+	if err := json.NewDecoder(resp.Body).Decode(&movie); err != nil {
+		return nil, err
+	}
+
+	return &movie, nil
+}
+
 // https://api.themoviedb.org/3/tv/{series_id}
 func GetShowById(id int) (*models.TMDBShowDetails, error) {
 	u := fmt.Sprintf("%s/tv/%d?language=en-US", baseTMDBURL, id)
