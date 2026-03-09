@@ -1,14 +1,47 @@
 package pages
 
 import (
+	"fmt"
+	"sudhanv09/torus/models"
 	"sudhanv09/torus/views/layouts"
 )
 
-templ Home() {
+templ Home(items []models.TrackedItem) {
 	@layouts.Base("Home") {
-		<header class="app-nav">
-			<input placeholder="Search" type="text" />
-			<p>User</p>
-		</header>
+		<div class="page">
+			if len(items) == 0 {
+				<div class="empty-state">
+					<p>Nothing tracked yet. <a href="/search">Search for something</a> to get started.</p>
+				</div>
+			} else {
+				<div class="tracked-grid">
+					for _, item := range items {
+						@TrackedCard(item)
+					}
+				</div>
+			}
+		</div>
 	}
+}
+
+templ TrackedCard(item models.TrackedItem) {
+	<article class="card search-card">
+		<div class="search-card--poster">
+			if item.PosterURL != "" {
+				<img src={ item.PosterURL } alt={ item.Title } loading="lazy"/>
+			} else {
+				<div class="poster-placeholder"><span>No Image</span></div>
+			}
+			<div class="badge secondary search-card--badge">{ item.Type }</div>
+		</div>
+		<div class="search-card--info">
+			<h3>{ item.Title }</h3>
+			if item.Year > 0 {
+				<small>{ fmt.Sprintf("%d", item.Year) }</small>
+			}
+			<div class="search-card--meta">
+				<span class="badge outline">{ item.Status }</span>
+			</div>
+		</div>
+	</article>
 }

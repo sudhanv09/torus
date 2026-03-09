@@ -12,7 +12,12 @@ import (
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	pages.Home().Render(r.Context(), w)
+	items, err := models.GetTrackedItems()
+	if err != nil {
+		log.Printf("error fetching tracked items: %v", err)
+		items = []models.TrackedItem{}
+	}
+	pages.Home(items).Render(r.Context(), w)
 }
 
 func SearchHandler(w http.ResponseWriter, r *http.Request) {

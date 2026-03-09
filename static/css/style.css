@@ -33,8 +33,15 @@ aside[data-sidebar] .brand {
     gap: 1rem;
 }
 
+.tracked-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
 .search-card {
     padding: 0;
+    cursor: pointer;
 }
 
 .search-card--poster {
@@ -84,6 +91,22 @@ aside[data-sidebar] .brand {
     padding: 3rem 1rem;
     text-align: center;
     color: var(--muted-foreground);
+}
+
+/* Dialog overrides */
+dialog {
+    max-width: 40rem;
+}
+
+.dialog-media {
+    gap: var(--space-4);
+}
+
+.dialog-poster {
+    width: 110px;
+    flex-shrink: 0;
+    border-radius: var(--radius-medium);
+    object-fit: cover;
 }
 
 @media (max-width: 768px) {
